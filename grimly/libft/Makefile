@@ -75,6 +75,7 @@ SRCS = ft_toupper \
 	   ft_lstnew \
 	   ft_lstiter \
 	   ft_lstmap \
+	   ft_lstrev \
 	   get_next_line \
 
 

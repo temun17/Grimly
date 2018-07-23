@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: atemunov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/04/30 17:15:04 by atemunov          #+#    #+#              #
-#    Updated: 2018/07/02 10:09:07 by atemunov         ###   ########.fr        #
+#    Created: 2018/07/22 22:33:49 by atemunov          #+#    #+#              #
+#    Updated: 2018/07/22 22:33:52 by atemunov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = ./libft/libft.a
 
 SRC = src/main.c \
+	src/get_maze.c \
+	src/dfs.c \
+	src/print_maze.c 
 
 OBJ = *.o
 
@@ -29,7 +32,6 @@ all : $(NAME)
 $(NAME):
 	@make -C libft/
 	$(CC) $(CFLAGS) $(SRC) $(INCLUDES) -o $(NAME)
-	@echo "Succesfully created FdF Executable"
 	$(READY)
 
 clean:

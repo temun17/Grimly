@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   grimly.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atemunov <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/22 22:33:36 by atemunov          #+#    #+#             */
+/*   Updated: 2018/07/22 22:33:39 by atemunov         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GRIMLY_H
 # define GRIMLY_H
 
 /*
-**------------------------------ External Headers ------------------------------
+**------------------------------ External Headers -----------------------------
 */
 
 # include "../libft/libft.h"
@@ -16,55 +28,39 @@
 **----------------------------- Macros Definition -----------------------------
 */
 
-# define HEIGHT 10
-# define WIDTH 10
-# define MAX 100
 
-# define TRUE 1
-# define FALSE 0
+/*
+**------------------------------ Global Variables -----------------------------
+*/
 
-# define initial 1
-# define waiting 2
+char** 				maze;
+int**				visited;
+int					line;
+int					cols;
+int					start_row;
+int					start_col;
+char				*file;
+
+enum	terrain
+{
+	empty,
+	wall,
+	goal,
+	steps
+};
 
 /*
 **---------------------------- Structure Definition ---------------------------
 */
 
-struct node
+typedef struct		s_env
 {
-	int mode;
-	struct node	*up;
-	struct node *left;
-	struct node *down;
-	struct node *right;
-	struct node *next;
-};
-
-typedef struct point
-{
-	int y;
-	int x;
-}Point;
-
-struct node matrix[HEIGHT][WIDTH];
-
-typedef struct		s_key
-{
-	char			*key;
-	int				row;
-	int				column;
-	int				**arr;
-	int				startx;
-	int				starty;
-}					t_key;
-
-typedef struct		s_rs
-{
-	int				run;
-	int				n;
-	int				exits;
-	int				entrance;
-}					t_rs;
+	int				j;
+	int				i;
+	int				swap;
+	char				c;
+	int				fd;
+}			t_env;
 
 typedef struct		s_bfs
 {
@@ -73,40 +69,20 @@ typedef struct		s_bfs
 	struct s_bfs	*parent;
 }					t_bfs;
 
-typedef struct		s_queue
-{
-	struct s_bfs	*node;
-	struct s_queue	*next;
-}					t_queue;
-
-
-typedef struct			s_char
-{
-	char			full;
-	char			empty;
-	char			path;
-	char			entrance;
-	char			exit;
-}				t_char;
-
-typedef struct			s_node
-{
-	int			x;
-	int			y;
-	char			curr;
-	struct s_2dpoints	*next;
-}				t_node;
-
+t_list				*read_input(void);
 
 /*
 **----------------------------- Helping Functions ----------------------------
 */
 
-void	setupMatrix(void);
-void	printMatrix(void);
-void	makeWall(Point first, Point second);
-Point	makePoint(int y, int x);
-int		validcard(int fd);
-int		dup_check(char *str);
+int				add_steps(int steps);
+void				print_steps(int tracker);
+void				print_visited();
+void				print_maze(int tracker);
+int				dfs(int row, int col);
+void				alloc_maze();
+void				alloc_visited();
+void				get_visited();
+int				get_maze(char *file_name);
 
 #endif
